@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa de Densidad de Personas en Aguachica</title>
+  <!-- Agrega los enlaces a los archivos CSS de Leaflet y Leaflet.heatmap -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.css" /> <!-- Corregido -->
+  <!-- Agrega el enlace al archivo JavaScript de Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <!-- Agrega el enlace al archivo JavaScript de Leaflet.heatmap -->
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script> <!-- Corregido -->
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100vh;"></div>
+  
+  <script>
+    // Crea un mapa y establece la vista inicial en Aguachica, Cesar, Colombia
+    var map = L.map('map').setView([8.3121, -73.6143], 14);
+
+    // Agrega una capa base de Leaflet
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Datos de ejemplo (latitud, longitud, cantidad de personas)
+    var data = [
+      [8.3105, -73.6112, 500], // Barrio 1
+      [8.3150, -73.6140, 800], // Barrio 2
+      [8.3058, -73.6107, 300], // Barrio 3
+      // Agrega más datos aquí
+    ];
+
+    var heatData = [];
+    for (var i = 0; i < data.length; i++) {
+      var lat = data[i][0];
+      var lng = data[i][1];
+      var count = data[i][2];
+      heatData.push([lat, lng, count]);
+    }
+
+    // Agrega áreas de color (marcaciones de calor)
+    var heat = L.heatLayer(heatData, {
+      radius: 30,
+      gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } // Ajusta los colores del gradiente
+    }).addTo(map);
+  </script>
+</body>
+</html>
