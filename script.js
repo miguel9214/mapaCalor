@@ -177,6 +177,7 @@ heatData.forEach(function(dataPoint, index) {
   // Asigna el evento click para abrir/cerrar tooltips
   marker.on('click', toggleTooltip);
 
+  
   // Abre todas las tooltips al iniciar el mapa
   marker.openTooltip();
 });
